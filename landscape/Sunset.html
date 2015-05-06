@@ -1,0 +1,87 @@
+<doctype html>
+    <html>
+<head>
+    <meta carset='utf-8'/>
+</head>
+<body>
+    <div class="CanvasContainer">
+        <canvas id="drawingCanvas" width="500" height="340"></canvas>
+    </div>
+    <script>
+        var canvas;
+        var context;
+
+        window.onload = function () {
+            canvas = document.getElementById("drawingCanvas");
+            context = canvas.getContext("2d");
+            //setTimeout("drawFrame()", 20);
+            drawFrame();
+        }
+        var x = 10;
+        var y = 0;
+        var c = 255;
+        var w = 500;
+        var h = 340;
+        var gi = 1;
+        var gc = 7;
+        var sunY = 0;
+        function drawFrame() {
+            //context.clearRect(0, 0, w, h);
+            context.fillStyle = "rgb(" + 0 + "," + 0 + "," + (c+30) + ")";
+            context.fillRect(0, 0, w, h);
+            context.fill();
+
+            context.beginPath();
+            context.fillStyle = "rgb(" + 255 + "," + c + "," + 0 + ")";
+            context.arc(w - 200, sunY, 40, 0, 2 * Math.PI, true);
+            context.fill();
+            sunY += 3;
+            context.beginPath();
+            context.fillStyle = "rgb(" + 0 + "," + c + "," + 50 + ")";
+            //context.fillRect(x, y, 10, 10);
+            context.arc(250, 1000, 800, -0.9, 4.1, true);
+            context.fill();
+            var out = false;
+            var gx = 0;
+            var gh = 40;
+            var go=40;
+            var gy = h - gh/1.7;
+            context.beginPath();
+            do {
+                gc += gi;
+                if (gc < -7 || gc > 7) gi = -gi;
+                context.strokeStyle = "rgb(" + 20 + "," + (c-50) + "," + 20 + ")";
+                context.lineWidth = 2;
+                context.moveTo(gx + gc, gy - gh);
+                context.lineTo(gx, gy);
+                context.stroke();
+                gx += go;
+                if (gx > w) out = true;
+            }
+            while (!out);
+            var out = false;
+            var gx = 30;
+            var gh = 40;
+            var go = 35;
+            var gy = h - gh*2;
+            do {
+                gc += gi;
+                if (gc < -7 || gc > 7) gi = -gi;
+                context.strokeStyle = "rgb(" + 20 + "," + (c - 50) + "," + 20 + ")";
+                context.lineWidth = 2;
+                context.moveTo(gx + gc, gy - gh);
+                context.lineTo(gx, gy);
+                context.stroke();
+                gx += go;
+                if (gx > w-70) out = true;
+            }
+            while (!out);
+            if(c>60)c-=2;
+            y +=1;
+            if (y >= 340) y = 0;
+            setTimeout("drawFrame()", 40);
+        }
+    </script>
+</body>
+</html>
+</doctype>
