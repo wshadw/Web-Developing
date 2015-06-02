@@ -1,0 +1,7 @@
+﻿{
+    success: true,
+    products: [
+        { id: 1, name: 'Ботинки', prot: 'нет', size: 39, price: 10, diskount: price/size},
+        { id: 2, name: 'Сапоги', prot: 'да', size: 45, price: 200, diskount: price/size}
+    ]
+}
