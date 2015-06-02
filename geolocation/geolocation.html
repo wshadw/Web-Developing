@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML 5</title>
+
+    <script>
+        function showPosition() {
+            var x = document.getElementById("geo");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (p) {
+                    x.innerHTML = "широта:" + p.coords.latitude + "<br>Долгота:" + p.coords.longitude;
+                }, function (err) { alter(err.message); });
+            } else { x.innerHTML = "No GEO"; }
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Геолокация</h1>
+        <span id="geo"></span>
+    </header>
+     <input type="button" value="определить" onclick="showPosition()" />
+    <footer>
+        <p></p>
+    </footer>
+</body>
+</html>
