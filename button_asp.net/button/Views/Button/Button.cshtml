@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Здесь могла быть ваша реклама!</title>
+    <script type="text/javascript">
+        function func() {
+            var text = document.getElementById("name").value;
+            try{if (text == null) return;}
+            catch(err) {return;}
+            var name = "Здесь могла быть ваша реклама!\n\n Кто такой: "+text+"?";
+            alert(name);
+        }
+    </script>
+</head>
+<body>
+    <form id="task" name="task">
+        Введите своё имя: <input type="text" id="name" name="name" />
+        <input type="button" value="kill Me" onclick="func();" />
+    </form>
+</body>
+</html>

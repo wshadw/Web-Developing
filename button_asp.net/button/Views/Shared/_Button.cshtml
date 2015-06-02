@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Кнопка","Button","Button")</li>
+    </ul>
+    using (Html.BeginForm("Button", "Button", FormMethod.Post, new { id = "button", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+            <li>@Html.ActionLink("Кнопка", "Button", "Button")</li>
+         
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Кнопка", "Button", "Button")</li>
+        </ul>
+}
