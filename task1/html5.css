@@ -1,0 +1,44 @@
+﻿header {
+ font: 30pt sans-serif; 
+    color: green;
+}
+
+nav {
+    color: blue;
+}
+
+ li{
+
+	display:inline
+	}
+a{
+color:green;
+	padding:0px 30px;
+	 font: 12pt sans-serif; 
+}
+
+li a.active{
+color: red;
+	 font: 20pt sans-serif;
+}
+
+article {color: white;padding:0px 100px 0px 0px;
+}
+
+text {
+
+    color: pink;
+}
+
+aside {
+    color: gray;
+}
+
+footer {
+    color: gray;
+}
+ 
+body 
+{
+background-color:black;
+}
