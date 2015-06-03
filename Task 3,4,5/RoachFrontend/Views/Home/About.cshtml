@@ -1,0 +1,61 @@
+﻿@{
+    var OutString = "";
+    var OutString1 = "";
+    var OutString2 = "";
+    var OutString3 = "";
+    var OutString4 = "";
+    var OutString5 = "";
+    var TypeString = "";
+    try
+    {
+        if ((int) ViewData["money"] > 0)
+        {
+            TypeString = "Перевод между счетами";
+            OutString = "Дата операции: " + DateTime.Now;
+            OutString1 = "От кого: ООО <<ТАРАКАНИЙБЕГ>>";
+            OutString2 = "Кому: " + ViewData["user"];
+            OutString3 = "ИНН: " + new Random(9).Next(0, 999999999);
+            OutString4 = "\nРасчетный счет: " + new Random(3).Next(0, 999999999) + new Random(4).Next(0, 999999999);
+            OutString5 = "\nСумма: " + ViewData["money"] + "$";
+        }
+        else
+        {
+            TypeString = "Счет на выплату";
+            //OutString = "Дата сотавления:"+DateTime.Now+ "\nОт кого: КОМПАНИЯ <<ТАРАКАНИЙБЕГ>>\nКому: " + ViewData["user"] + "\nИНН: " + new Random().Next(0, 999999999) + "\nРасчетный счет: " + new Random().Next(0, 999999999) + new Random().Next(0, 999999999) + "\nСумма: " + Math.Abs((int)ViewData["money"]) + "$";
+            OutString = "Дата сотавления: " + DateTime.Now;
+            OutString1 = "От кого: ООО <<ТАРАКАНИЙБЕГ>>";
+            OutString2 = "Кому: " + ViewData["user"];
+            OutString3 = "ИНН: " + new Random(8).Next(0, 999999999);
+            OutString4 = "\nРасчетный счет: " + new Random(15).Next(0, 999999999) + new Random(20).Next(0, 999999999);
+            OutString5 = "\nСумма: " + Math.Abs((int)ViewData["money"]) + "$";
+        
+        }
+    }
+    catch { }
+    ViewBag.Title = TypeString;
+    
+}
+<style media="print">
+    .no_print {
+        display: none;
+    }
+</style>
+<table name="tabl" id="tabl" border="2px">
+    <td>
+        <br />
+        <h3 style="text-align: center">@TypeString</h3>
+        ***********************************<br />
+        ***********************************<br />
+        @OutString<br />
+        ***********************************<br />
+        @OutString1<br />
+        @OutString2<br />
+        @OutString3<br />
+        @OutString4<br />
+        ***********************************<br />
+        @OutString5<br />
+        ***********************************<br />
+        ***********************************<br /><br />
+    </td>
+</table>
+<br/><button class="no_print" onclick="window.print()">Печать</button>

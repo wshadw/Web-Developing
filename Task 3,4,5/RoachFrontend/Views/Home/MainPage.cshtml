@@ -1,0 +1,130 @@
+﻿@{
+    string playerName = "";
+    try
+    {
+        if (ViewData["UserName"] != null) { playerName = ViewData["UserName"].ToString(); }
+    }
+    catch { }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="windows-1251" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script language="javascript" charset="windows-1251" src="~/Scripts/mygame1.js"></script>
+    <script type="text/javascript" charset="windows-1251" src="~/Scripts/ext-all-debug.js"></script>
+    <script type="text/javascript" charset="windows-1251">
+        function SubmitStats(parameters) {
+            Ext.Ajax.request({
+                url: '/Home/SaveStats',
+                method: 'POST',
+                params: {
+                    data: Ext.encode({
+                        user: 'User1',
+                        money: 100
+                    })
+                },
+                success: function (response) {
+                    var text = response.responseText;
+                    alert(text);
+                    // process server response here
+                }
+            });
+        }
+    </script>
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        a {
+            display: block;
+        }
+    </style>
+
+
+    <title>Игровой портал - Тарканьи бега</title>
+</head>
+<body style="background: darkslategray">
+    <script>
+document.charset = "windows-1251";
+        function logOut() {
+            Ext.Ajax.request({
+                url: '/Home/LogOut',
+                method: 'POST',
+                params: {
+                    data: ""
+                },
+                success: function (response) {
+                    window.location.href = "/Home/Index";
+                }
+            });
+        }</script>
+    <nav style="text-align: right">
+        <ul style="font-size: 20px;">
+            <li><button hidden id="Statistic" onclick='window.location.href = "/Home/Manage"'>Статистика</button></li>
+            <li><button onclick="logOut();">Выйти из пользователя</button></li>
+        </ul>
+    </nav>
+    <article>
+        <table style="width: 100%;height: 100%; margin: 0px auto;background: silver; border: 4px solid #fff;">
+            <tr>
+                <td>
+                    <div style="text-align: center;margin: 0px auto;background: silver; border: 4px solid #fff;">
+                        <canvas id="drawingCanvas" width="1250" height="390"></canvas>
+                    </div>
+                </td>
+            </tr>
+            <tr style="text-align: center; margin: 0px auto">
+                <td>
+                    <table style="text-align: center; margin: 0px auto">
+                        <td>
+                            <table border="4" style="background: silver">
+                                <td hidden style="width: 200px; vertical-align: top; text-align: center;">
+                                    <h2>Регистрация игроков</h2> <br /><br />
+                                    <b>Имя:  </b><input style="width: 130px;" type="text" id="NamePl" size="10" /><br /><br />
+                                    <input type="button" name="btaddplayer" value="Добавить игрока" onclick="AddPlayer();" />
+                                </td>
+                                <td style="width: 250px; vertical-align: top; text-align: center;">
+                                    <h2>Ставки</h2>
+                                    <b>Игрок:  </b>
+                                    <select style="width: 170px;" id="PlyerSelect" name="PlyerSelect">
+                                        <option selected>@playerName</option>
+                                    </select>
+                                    <p>
+                                        <b>Номер дорожки:</b>
+                                        <br /><input type="radio" name="nomer" id="1nomer" value="1"> №1 <br>
+                                        <input type="radio" name="nomer" id="2nomer" value="2"> №2 <br>
+                                        <input type="radio" name="nomer" id="3nomer" value="3"> №3 <br>
+                                    </p>
+                                    <b>Сумма:  </b><input style="width: 130px;" type="text" id="Cash" value="0" onkeyup="this.value=parseInt(this.value) | 0" size="10" /><b> $</b><br /><br />
+                                    <input type="button" name="btaddcash" value="Сделать ставку" onclick="AddCash();" />
+                                </td>
+                                <td style="width: 250px; vertical-align: top; text-align: center;">
+                                    <h2>История ставок</h2>
+                                    <select style="width: 220px;" id="PlyersCash" name="PlyersCash" size="12"></select>
+                                </td>
+                                <td style="width: 250px; vertical-align: top; text-align: center;">
+                                    <h2>Результат</h2>
+                                    <select style="width: 220px;" id="PlyerWins" name="PlyerWins" size="12"></select>
+                                </td>
+                            </table>
+                        </td>
+                        <td style="width: 400px; height: 250px; vertical-align: top; text-align: center;">
+                            <input style="width: 400px; height: 100%; font-size: 50px; background: gray;" type="button" value="Старт" onclick="roll();">
+                        </td>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </article>
+</body>
+</html>

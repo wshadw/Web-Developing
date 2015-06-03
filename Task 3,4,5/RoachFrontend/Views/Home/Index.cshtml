@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="windows-1251" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" charset="windows-1251" src="~/Scripts/ext-all-debug.js"></script>
+    <script type="text/javascript" charset="windows-1251">
+    function SubmitStats(parameters) {
+        Ext.Ajax.request({
+            url: '/Home/SaveStats',
+            method: 'POST',
+            params: {
+                data: Ext.encode({
+                    user: 'User1',
+                    money: 100
+                })
+            },
+            success: function (response) {
+                var text = response.responseText;
+                alert(text);
+                // process server response here
+            }
+        });
+    }
+    </script>
+
+    <style>
+         ul {
+             list-style-type: none;
+             margin: 0;
+             padding: 0;
+             overflow: hidden;
+         }
+
+        li {
+            float: left;
+        }
+
+        a {
+            display: block;
+        }
+    </style>
+
+
+    <title>Игровой портал - Авторизация</title>
+</head>
+    <body style="background: darkslategray">
+        <script>document.charset = "windows-1251";
+            function SignIn() {
+                //var textErr = getElementById("textErr");
+                var UserName = document.getElementById("UserName");
+                var UserPass = document.getElementById("UserPass");
+                textErr.innerHTML = " ";
+                if (UserName.value == "" || UserName.value == " ") { textErr.innerHTML = "Введите имя пользователя!"; return; }
+                else if (UserPass.value == "" || UserPass.value == " ") { textErr.innerHTML = "Введите пароль!"; return; }
+
+                    Ext.Ajax.request({
+                        url: '/Home/CheckUser',
+                        method: 'POST',
+                        params: {
+                            data: Ext.encode({
+                                user: UserName.value,
+                                password: UserPass.value
+                            })
+                        },
+                        success: function (response) {
+                            var text = response.responseText;
+                            if (text == "OK") window.location.href = "/Home/MainPage";
+                            else textErr.innerHTML = "Неверные данные!";
+                        }
+                    });
+            }
+        </script>
+        <h1 align="center" style="color: white">Тараканьи бега</h1>
+        <div style="margin: 0px auto;background: silver;width: 300px; border: 3px solid #fff;border-radius: 10px;">
+            <h3 align="center">Авторизация</h3><hr/>
+            <div style="text-align: center">
+                        <span style="color: red;" id="textErr"></span>
+            </div> <br/>
+            <table style="vertical-align: central;width: 300px;">
+                <tr>
+                    <td>Имя пользователя:</td>
+                    <td><input style="width: 130px;" type="text" id="UserName" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td><input style="width: 130px;" type="password" id="UserPass" size="10" /></td>
+                </tr>
+            </table><br/>
+            <div style="text-align: center">
+                <button onclick='SignIn();'>Войти</button>
+                <br />
+                <br/>
+                <a href="/Home/AddUserPage">Регистрация</a>
+            </div>
+            <br/>
+        </div>
+    </body>
+</html>

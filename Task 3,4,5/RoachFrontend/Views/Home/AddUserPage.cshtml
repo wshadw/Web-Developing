@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="windows-1251" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" charset="windows-1251" src="~/Scripts/ext-all-debug.js"></script>
+    <script type="text/javascript" charset="windows-1251">
+    function SubmitStats(parameters) {
+        Ext.Ajax.request({
+            url: '/Home/SaveStats',
+            method: 'POST',
+            params: {
+                data: Ext.encode({
+                    user: 'User1',
+                    money: 100
+                })
+            },
+            success: function (response) {
+                var text = response.responseText;
+                alert(text);
+                // process server response here
+            }
+        });
+    }
+    </script>
+
+    <style>
+         ul {
+             list-style-type: none;
+             margin: 0;
+             padding: 0;
+             overflow: hidden;
+         }
+
+        li {
+            float: left;
+        }
+
+        a {
+            display: block;
+        }
+    </style>
+
+
+    <title>Игровой портал - Авторизация</title>
+</head>
+    <body style="background: darkslategray">
+        <script>document.charset = "windows-1251";
+            function CheckedChanged() {
+                var confButton = document.getElementById("confButton");
+                var confCheckBox = document.getElementById("confCheckBox");
+                if (confCheckBox.checked) confButton.disabled = false;
+                else confButton.disabled = true;
+            }
+            
+        </script>
+        <script type="text/javascript" charset="windows-1251" src="~/Scripts/reg.js"></script>
+        <h1 align="center" style="color: white">Тараканьи бега</h1>
+        <div style="margin: 0px auto;background: silver;width: 300px; border: 3px solid #fff;border-radius: 10px;">
+            <h3 align="center">Регистрация</h3><hr/>
+            <div style="text-align: center">
+                        <span style="color: red;" id="textErr"></span>
+            </div> <br/>
+            <table style="vertical-align: central;width: 300px;">
+                <tr>
+                    <td>Имя пользователя:</td>
+                    <td><input style="width: 130px;" type="text" id="UserName" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td><input style="width: 130px;" type="password" id="UserPass" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>Повторите пароль:</td>
+                    <td><input style="width: 130px;" type="password" id="UserPass2" size="10" /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input style="width: 130px;" type="email" id="UserEmail" size="10" /></td>
+                </tr>
+            </table>
+            <div style="text-align: center">
+                <input type="checkbox" onchange="CheckedChanged();" id="confCheckBox"/> С несуществующими правилами согласен.<br /><br />
+                <button disabled id="confButton" onclick='SignIn();'>Готово</button><button onclick='window.location.href = "/Home/Index";'>Отмена</button>
+            </div>
+            <br/>
+        </div>
+    </body>
+</html>
